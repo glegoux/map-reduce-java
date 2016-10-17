@@ -37,11 +37,26 @@ https://maven.apache.org/
 
 # Coding Style
 
+See https://google.github.io/styleguide/javaguide.html.
+
 # Test
+
+~~~
+mvn test
+~~~
 
 # Javadoc
 
+~~~
+mvn javadoc:javadoc
+~~~
+
 # Run
+
+~~~
+mvn exec:java
+~~~
+
 
 
 
