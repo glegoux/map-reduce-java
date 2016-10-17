@@ -29,6 +29,7 @@ http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/neon1a
 
 - https://marketplace.eclipse.org/content/tm-terminal
 - https://marketplace.eclipse.org/content/objectaid-uml-explorer
+- https://marketplace.eclipse.org/content/easyshell
 
 # Software Project Management and Comprehension Tool
 
