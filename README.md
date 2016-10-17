@@ -63,6 +63,9 @@ mvn javadoc:javadoc
 mvn exec:java
 ~~~
 
+# References
+
+- https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
 
 
 
