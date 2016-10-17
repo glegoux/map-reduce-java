@@ -39,6 +39,12 @@ https://maven.apache.org/
 
 See https://google.github.io/styleguide/javaguide.html.
 
+# Install
+
+~~~
+mvn install
+~~~
+
 # Test
 
 ~~~
