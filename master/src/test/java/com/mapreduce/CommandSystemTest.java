@@ -1,17 +1,19 @@
-import static fr.telecom.system.CommandSystem.executeBash;
-import static fr.telecom.system.CommandSystem.executeScriptBash;
-import static fr.telecom.system.CommandSystem.executePython;
-import static fr.telecom.system.CommandSystem.executeScriptPython;
-import static fr.telecom.system.CommandSystem.executeBySSH;
+package com.mapreduce;
+
+import static com.mapreduce.system.CommandSystem.executeBash;
+import static com.mapreduce.system.CommandSystem.executeScriptBash;
+import static com.mapreduce.system.CommandSystem.executePython;
+import static com.mapreduce.system.CommandSystem.executeScriptPython;
+import static com.mapreduce.system.CommandSystem.executeBySSH;
 
 import java.util.Objects;
 
-import fr.telecom.system.CommandSystem.Result;
+import com.mapreduce.system.CommandSystem.Result;
 import junit.framework.TestCase;
 
 public class CommandSystemTest extends TestCase {
 
-  public static String DATA_DIR = "src/test/java/fr/telecom/data/";
+  public static String DATA_DIR = "src/test/java/com/mapreduce/data/";
 
   public void test01executeBashOK() {
     Result result = executeBash("echo $((2 + 3))");

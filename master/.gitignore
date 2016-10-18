@@ -2,6 +2,9 @@
 **/*.class
 **/*.jar
 
+# Javadoc
+src/doc/
+
 # Eclipse
 .classpath
 .target

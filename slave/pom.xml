@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.mapreduce</groupId>
+	<artifactId>map-reduce-slave</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>map-reduce-slave</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<!-- general -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+
+		<!-- plugins -->
+		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
+		<plugin.maven.assembly.version>2.6</plugin.maven.assembly.version>
+		<!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+		<plugin.maven.compiler.version>2.4</plugin.maven.compiler.version>
+		<!-- http://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
+		<plugin.exec.maven.version>1.3</plugin.exec.maven.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+		<plugin.maven.javadoc.version>2.10.4</plugin.maven.javadoc.version>
+		<!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+		<plugin.maven.javadoc.version>2.10.4</plugin.maven.javadoc.version>
+		<!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-eclipse-plugin -->
+		<plugin.maven.eclipse.version>2.10</plugin.maven.eclipse.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+		<plugin.maven.jar.version>3.0.2</plugin.maven.jar.version>
+		<!-- dependencies -->
+		<!-- http://mvnrepository.com/artifact/junit/junit -->
+		<junit.version>4.12</junit.version>
+		<!-- http://commons.apache.org/proper/commons-lang/ -->
+		<commons.version>3.5</commons.version>
+		<!-- https://github.com/google/guava -->
+		<guava.version>19.0</guava.version>
+	</properties>
+
+	<build>
+
+		<testSourceDirectory>src/test/java/com/mapreduce/</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<!-- mvn compile assembly:single -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${plugin.maven.assembly.version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.mapreduce.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- mvn compile -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${plugin.maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<!-- mvn exec:java -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${plugin.exec.maven.version}</version>
+				<configuration>
+					<mainClass>com.mapreduce.App</mainClass>
+				</configuration>
+			</plugin>
+			<!-- mvn jar:jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>com.mapreduce.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- mvn javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${plugin.maven.javadoc.version}</version>
+				<configuration>
+					<outputDirectory>src/</outputDirectory>
+					<reportOutputDirectory>src/</reportOutputDirectory>
+					<destDir>doc</destDir>
+				</configuration>
+			</plugin>
+			<!-- mvn eclipse:eclipse -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

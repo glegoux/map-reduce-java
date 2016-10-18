@@ -1,4 +1,4 @@
-package fr.telecom.system;
+package com.mapreduce.system;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -13,16 +13,12 @@ import com.google.common.base.Joiner;
 
 public class CommandSystem {
 
-  public static void main(String[] args) {
-    System.out.println(executeBash("pwd"));
-    System.out.println(executeBySSH("pwd").commandLine);
-  }
-
-  public static final String CONFIG_FILE = "src/main/java/fr/telecom/system/config.properties";
+  public static final String CONFIG_FILE = "/com/mapreduce/system/config.properties";
   public static Properties CONFIG;
   static {
     try {
-      CONFIG = CommandSystem.getConfig();
+      CONFIG = new Properties();
+      CONFIG.load(CommandSystem.class.getResourceAsStream(CONFIG_FILE));
     } catch (IOException e) {
       System.err.println(String.format("Missing configuration %s", CONFIG_FILE));
     }
@@ -59,6 +55,10 @@ public class CommandSystem {
     public String toString() {
       return ToStringBuilder.reflectionToString(this);
     }
+  }
+
+  public static Result executeRemoteJar(String pahtToJar, String ip) {
+    return execute(SSH, String.format("%s@%s", DEFAULT_USER_SSH, ip), String.format("jar %s"));
   }
 
   public static Result executeBySSH(String command) {

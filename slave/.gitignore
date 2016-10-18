@@ -1,0 +1,19 @@
+# Java
+**/*.class
+**/*.jar
+
+# Javadoc
+src/doc/
+
+# Eclipse
+.classpath
+.target
+.project
+.settings/
+.metadata/
+.recommenders/
+bin/
+
+# Maven
+target/
+
