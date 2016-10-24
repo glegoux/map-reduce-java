@@ -1,5 +1,3 @@
-package com.mapreduce;
-
 import static com.mapreduce.system.CommandSystem.executeBash;
 import static com.mapreduce.system.CommandSystem.executeScriptBash;
 import static com.mapreduce.system.CommandSystem.executePython;

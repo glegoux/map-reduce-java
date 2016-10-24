@@ -35,8 +35,7 @@ public class CommandSystem {
   public static final String SSH_PASS = CONFIG.getProperty("sshpass", "/usr/bin/sshpass");
 
   public static final String DEFAULT_USER_SSH = CONFIG.getProperty("ssh.user", "glegoux");
-  public static final String DEFAULT_HOSTNAME_SSH =
-      CONFIG.getProperty("ssh.hostname", "ssh.enst.fr");
+  public static final String DEFAULT_HOSTNAME_SSH = CONFIG.getProperty("ssh.hostname", "ssh.enst.fr");
 
   public static class Result {
     public String commandLine;
