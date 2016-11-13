@@ -29,7 +29,7 @@
 		<!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-eclipse-plugin -->
 		<plugin.maven.eclipse.version>2.10</plugin.maven.eclipse.version>
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-		
+
 		<plugin.maven.jar.version>3.0.2</plugin.maven.jar.version>
 		<!-- dependencies -->
 		<!-- http://mvnrepository.com/artifact/junit/junit -->
@@ -48,6 +48,7 @@
 				<directory>src/main/java</directory>
 				<includes>
 					<include>**/*.properties</include>
+					<include>**/*.txt</include>
 				</includes>
 			</resource>
 		</resources>
@@ -129,6 +130,26 @@
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
+			</plugin>
+			<!-- mvn validate -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo>[user.home] ${user.home}</echo>
+								<echo>[maven.home] ${maven.home}</echo>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

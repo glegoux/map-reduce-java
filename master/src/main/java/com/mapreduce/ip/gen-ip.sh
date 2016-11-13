@@ -6,5 +6,5 @@ room=$1
 number_machines=$2
 
 for n in `seq 1 ${number_machines}`; do
-	echo "${room}-`printf "%02d" $n`"
+  echo "${room}-`printf "%02d" $n`"
 done
