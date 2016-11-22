@@ -29,7 +29,7 @@ public class Main {
 
     // Split input to make all Sx files
     String filename = args[1];
-    Cleaner.clean(filename);
+    filename = Cleaner.clean(filename);
     int numberOfChunks = Splitter.lineByLine(filename);
     
     // Init
@@ -96,7 +96,10 @@ public class Main {
     }
     
     // Merge all RMx files in a single file output
-    Aggregator.assemble(numberOfWords);
+    String outputPathname = Aggregator.assemble(numberOfWords);
+    
+    // Show result
+    Displayer.result(outputPathname);
 
   }
 

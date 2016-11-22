@@ -10,11 +10,12 @@ import java.io.InputStreamReader;
 
 public class Aggregator {
 
-  public static void assemble(int numberOfwords) {
-    
+  public static String assemble(int numberOfwords) {
+
+    String outputPathname = Config.SHARED_DIRECTORY_LOCATION + "output";
     FileWriter fstream;
     BufferedWriter out = null;
-    File output = new File(Config.SHARED_DIRECTORY_LOCATION + "output");
+    File output = new File(outputPathname);
     try {
       fstream = new FileWriter(output, true);
       out = new BufferedWriter(fstream);
@@ -45,6 +46,8 @@ public class Aggregator {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    return outputPathname;
 
   }
 
