@@ -1,4 +1,4 @@
-package com.mapreduce.ip;
+package com.mapreduce;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IPReader {
-
-  public static void main(String[] args) {
-    System.out.println(readFile("ip.txt"));
-  }
+  
+  public static String IP_FILENAME = "/com/mapreduce/network/ip.txt";
 
   public static List<String> readFile(String filename) {
 

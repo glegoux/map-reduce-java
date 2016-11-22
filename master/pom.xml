@@ -13,7 +13,7 @@
 	<properties>
 		<!-- general -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+		<java.version>1.7</java.version>
 
 		<!-- plugins -->
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
@@ -29,13 +29,15 @@
 		<!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-eclipse-plugin -->
 		<plugin.maven.eclipse.version>2.10</plugin.maven.eclipse.version>
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-
 		<plugin.maven.jar.version>3.0.2</plugin.maven.jar.version>
+
 		<!-- dependencies -->
 		<!-- http://mvnrepository.com/artifact/junit/junit -->
 		<junit.version>4.12</junit.version>
 		<!-- http://commons.apache.org/proper/commons-lang/ -->
-		<commons.version>3.5</commons.version>
+		<commons.lang.version>3.5</commons.lang.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+		<commons.io.version>1.3.2</commons.io.version>
 		<!-- https://github.com/google/guava -->
 		<guava.version>19.0</guava.version>
 	</properties>
@@ -49,6 +51,7 @@
 				<includes>
 					<include>**/*.properties</include>
 					<include>**/*.txt</include>
+					<include>**/*.sh</include>
 				</includes>
 			</resource>
 		</resources>
@@ -73,7 +76,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>com.mapreduce.App</mainClass>
+							<mainClass>com.mapreduce.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -101,7 +104,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
+				<version>${plugin.maven.jar.version}</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -126,6 +129,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${plugin.maven.eclipse.version}</version>
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
@@ -164,8 +168,14 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>${commons.version}</version>
+			<version>${commons.lang.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
