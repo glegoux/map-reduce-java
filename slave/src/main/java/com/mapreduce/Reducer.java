@@ -13,7 +13,7 @@ public class Reducer {
   public static int merge(String word, String... umxs) {
     List<String> words = new LinkedList<>();
     for (String umx : umxs) {
-      words.addAll(Util.readFile(Config.SHARED_DIRECTORY_LOCATION + umx));
+      words.addAll(Utils.readFile(Config.SHARED_DIRECTORY_LOCATION + umx));
     }
     return Collections.frequency(words, word);
   }

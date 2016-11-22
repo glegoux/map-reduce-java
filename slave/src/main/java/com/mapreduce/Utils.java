@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Util {
+public class Utils {
 
   public static ArrayList<String> readFile(String filename) {
     List<String> lines = null;

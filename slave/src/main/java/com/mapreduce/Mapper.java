@@ -12,7 +12,7 @@ import java.util.Set;
 public class Mapper {
 
   public static List<String> split(String sx) {
-    ArrayList<String> lines = Util.readFile(Config.SHARED_DIRECTORY_LOCATION + sx);
+    ArrayList<String> lines = Utils.readFile(Config.SHARED_DIRECTORY_LOCATION + sx);
     List<String> words = new ArrayList<>();
     for (String line : lines) {
       for (String word : line.split("\\W+")) {
