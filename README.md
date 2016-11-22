@@ -60,7 +60,7 @@ Go to the root of this repository, and do:
 ./script/compile.sh
 ~~~
 
-It makes a `map-reduce-env/` folder to your home.
+It makes a `map-reduce-env/` folder in your home.
 
 ## Run
 
