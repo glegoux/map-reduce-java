@@ -25,6 +25,7 @@ public class SxUmxJob extends Thread {
   public void run() {
     if (isRemote) {
       this.result = SlaveHelper.executeRemote(slaveName, args);
+      System.out.println(result);
     } else {
       this.result = SlaveHelper.executeLocal(args);
     }

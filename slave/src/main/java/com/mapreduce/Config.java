@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class Config {
 
-  public static final String CONFIG_FILE = "config/config.properties";
+  public static final String CONFIG_FILE = "/cal/homes/glegoux/map-reduce-env/config/config.properties";
   public static Properties CONFIG;
   static {
     try {

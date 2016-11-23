@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-scp ../map-reduce-env glegoux@ssh.enst.fr:~/
+scp -r ~/map-reduce-env glegoux@ssh.enst.fr:~/

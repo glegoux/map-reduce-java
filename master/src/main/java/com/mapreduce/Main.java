@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import com.google.common.base.Objects;
 import com.mapreduce.config.Config;
 import com.mapreduce.network.Cluster;
+import com.mapreduce.network.SlaveHelper;
 import com.mapreduce.network.SxUmxJob;
 import com.mapreduce.network.UmxRmxJob;
 import com.mapreduce.profiler.Profiler;
@@ -22,6 +23,7 @@ public class Main {
 
   public static Cluster cluster;
   public static int numberOfChunks;
+  public static int numberOfSlaves;
   public static ExecutorService executorService;
   public static boolean isRemote;
   public static int numberOfWords;
@@ -63,6 +65,10 @@ public class Main {
   @Profiler(name = "Init")
   public static void init(String filename) {
     Main.filename = Cleaner.clean(filename);
+    if (isRemote) {
+      cluster = new Cluster();
+      numberOfSlaves = cluster.slaveNames.size();
+    }
   }
 
   @Profiler(name = "Splitting")
@@ -76,16 +82,22 @@ public class Main {
     executorService = Executors.newFixedThreadPool(Config.THREAD_NUMBER);
     // Map
     for (int chunkNumber = 1; chunkNumber <= numberOfChunks; chunkNumber++) {
-      SxUmxJob slave =
-          new SxUmxJob(isRemote, umxMap, "thread" + chunkNumber, "slave" + chunkNumber,
-              "modeSXUMX", String.valueOf(chunkNumber));
-      executorService.execute(slave);
+      String slaveName = "slave" + chunkNumber;
+      if (isRemote) {
+        slaveName =
+            cluster.slaveNames.get(SlaveHelper.chooseSlaveIndex(chunkNumber - 1, numberOfSlaves));
+      }
+      SxUmxJob slaveJob =
+          new SxUmxJob(isRemote, umxMap, "thread" + chunkNumber, slaveName, "modeSXUMX",
+              String.valueOf(chunkNumber));
+      executorService.execute(slaveJob);
     }
     executorService.shutdown();
 
     // Wait for each treatment
     while (!executorService.isTerminated()) {
     }
+
   }
 
   @Profiler(name = "Shuffling")
@@ -110,9 +122,13 @@ public class Main {
       slaveArgs[1] = word;
       slaveArgs[2] = smxNumber;
       System.arraycopy(umxs, 0, slaveArgs, 3, umxs.length);
-      UmxRmxJob slave =
-          new UmxRmxJob(isRemote, "thread" + wordNumber, "slave" + wordNumber, slaveArgs);
-      executorService.execute(slave);
+      String slaveName = "slave" + wordNumber;
+      if (isRemote) {
+        slaveName =
+            cluster.slaveNames.get(SlaveHelper.chooseSlaveIndex(wordNumber - 1, numberOfSlaves));
+      }
+      UmxRmxJob slaveJob = new UmxRmxJob(isRemote, "thread" + wordNumber, slaveName, slaveArgs);
+      executorService.execute(slaveJob);
       wordNumber++;
     }
     executorService.shutdown();
@@ -120,6 +136,7 @@ public class Main {
     // Wait for each treatment
     while (!executorService.isTerminated()) {
     }
+
   }
 
   @Profiler(name = "Assembling")

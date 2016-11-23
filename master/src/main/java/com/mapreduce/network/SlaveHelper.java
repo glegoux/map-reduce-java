@@ -9,6 +9,14 @@ import com.mapreduce.system.SystemCommand;
 import com.mapreduce.system.SystemCommand.Result;
 
 public class SlaveHelper {
+  
+  public static int chooseSlaveIndex(int taskNumber, int numberOfSlaves) {
+    if (taskNumber < numberOfSlaves) {
+      return taskNumber;
+    } else {
+      return taskNumber % numberOfSlaves;
+    }
+  }
 
   public static Result executeRemote(String slaveName, String... arguments) {
     String[] args = new String[arguments.length + 5];
