@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.utils;
 
 import java.nio.file.Paths;
 import java.text.Normalizer;
@@ -10,6 +10,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
+import com.mapreduce.Config;
 
 
 public class Cleaner {

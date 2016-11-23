@@ -4,7 +4,8 @@ import static com.mapreduce.Config.DEFAULT_USER_SSH;
 import static com.mapreduce.Config.SLAVE_JAR_LOCATION;
 import static com.mapreduce.Config.SSH;
 
-import com.mapreduce.SystemCommand.Result;
+import com.mapreduce.system.SystemCommand;
+import com.mapreduce.system.SystemCommand.Result;
 
 public class Slave extends Thread {
 

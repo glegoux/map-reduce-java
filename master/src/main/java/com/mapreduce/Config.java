@@ -40,5 +40,8 @@ public class Config {
   public static final String SHARED_DIRECTORY_LOCATION = CONFIG.getProperty("shared.directory.location");
   public static final String SLAVE_JAR_LOCATION = CONFIG.getProperty("slave.jar.location");
   public static final String MASTER_JAR_LOCATION = CONFIG.getProperty("master.jar.location");
+  
+  // profiler
+  public static final String PROFILER_LOG_LOCATION = CONFIG.getProperty("profiler.log.location");
 
 }

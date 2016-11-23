@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.system;
 
 import static com.mapreduce.Config.DEFAULT_HOSTNAME_SSH;
 import static com.mapreduce.Config.DEFAULT_USER_SSH;
@@ -6,8 +6,8 @@ import static com.mapreduce.Config.PYTHON;
 import static com.mapreduce.Config.SHELL;
 import static com.mapreduce.Config.SSH;
 import static com.mapreduce.Config.SSH_PASS;
-import static com.mapreduce.SystemCommand.Result;
-import static com.mapreduce.SystemCommand.execute;
+import static com.mapreduce.system.SystemCommand.Result;
+import static com.mapreduce.system.SystemCommand.execute;
 
 public class BasicSystemCommand {
 

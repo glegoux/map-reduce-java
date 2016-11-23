@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

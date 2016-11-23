@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.system;
 
 import java.io.BufferedReader;
 import java.io.IOException;

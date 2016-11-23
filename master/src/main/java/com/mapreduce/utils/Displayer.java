@@ -1,6 +1,7 @@
-package com.mapreduce;
+package com.mapreduce.utils;
 
-import com.mapreduce.SystemCommand.Result;
+import com.mapreduce.system.BasicSystemCommand;
+import com.mapreduce.system.SystemCommand.Result;
 
 public class Displayer {
 
