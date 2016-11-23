@@ -1,10 +1,16 @@
 package com.mapreduce;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.google.common.base.Objects;
+import com.mapreduce.config.Config;
+import com.mapreduce.network.Cluster;
+import com.mapreduce.network.SxUmxJob;
+import com.mapreduce.network.UmxRmxJob;
 import com.mapreduce.profiler.Profiler;
 import com.mapreduce.utils.Aggregator;
 import com.mapreduce.utils.Cleaner;
@@ -14,13 +20,14 @@ import com.mapreduce.utils.Splitter;
 
 public class Main {
 
-  public static Slave[] slaves;
+  public static Cluster cluster;
   public static int numberOfChunks;
+  public static ExecutorService executorService;
   public static boolean isRemote;
   public static int numberOfWords;
   public static String filename;
-  public static Map<Integer, String[]> umxMap = new HashMap<>();
-  public static Map<String, List<String>> wordMap = new HashMap<>();
+  public static Map<Integer, String[]> umxMap = new ConcurrentHashMap<>();
+  public static Map<String, List<String>> wordMap = new ConcurrentHashMap<>();
 
   @Profiler(name = "Total")
   public static void main(String[] args) throws InterruptedException {
@@ -56,54 +63,41 @@ public class Main {
   @Profiler(name = "Init")
   public static void init(String filename) {
     Main.filename = Cleaner.clean(filename);
-    int numberOfSlaves = numberOfChunks;
-    slaves = new Slave[numberOfSlaves];
   }
 
   @Profiler(name = "Splitting")
   public static void splitting() {
     // Split input to make all Sx files
     numberOfChunks = Splitter.lineByLine(filename);
-    slaves = new Slave[numberOfChunks];
   }
 
   @Profiler(name = "Mapping")
   public static void mappping() throws InterruptedException {
+    executorService = Executors.newFixedThreadPool(Config.THREAD_NUMBER);
     // Map
     for (int chunkNumber = 1; chunkNumber <= numberOfChunks; chunkNumber++) {
-      slaves[chunkNumber - 1] =
-          new Slave(isRemote, "thread" + chunkNumber, "slave" + chunkNumber, "modeSXUMX",
-              String.valueOf(chunkNumber));
-      slaves[chunkNumber - 1].start();
+      SxUmxJob slave =
+          new SxUmxJob(isRemote, umxMap, "thread" + chunkNumber, "slave" + chunkNumber,
+              "modeSXUMX", String.valueOf(chunkNumber));
+      executorService.execute(slave);
     }
+    executorService.shutdown();
 
     // Wait for each treatment
-    for (int i = 0; i < numberOfChunks; i++) {
-      slaves[i].join();
-    }
-
-    // Make dictionnary
-    for (Slave slave : slaves) {
-      if (slave == null) {
-        continue;
-      }
-      int umx = Integer.parseInt(slave.args[1]);
-      String[] words = slave.result.stdout.split("\\n");
-      umxMap.put(umx, words);
+    while (!executorService.isTerminated()) {
     }
   }
 
   @Profiler(name = "Shuffling")
   public static void shuffling() {
-    // Make inversed dictionnary
+    // Make reversed dictionary
     wordMap = Reverser.umxMap(umxMap);
     numberOfWords = wordMap.size();
   }
 
   @Profiler(name = "Reducing")
   public static void reducing() throws InterruptedException {
-    int numberOfSlaves = numberOfWords;
-    slaves = new Slave[numberOfSlaves];
+    executorService = Executors.newFixedThreadPool(Config.THREAD_NUMBER);
     // Reduce
     int wordNumber = 1;
     for (Map.Entry<String, List<String>> entry : wordMap.entrySet()) {
@@ -116,17 +110,16 @@ public class Main {
       slaveArgs[1] = word;
       slaveArgs[2] = smxNumber;
       System.arraycopy(umxs, 0, slaveArgs, 3, umxs.length);
-      slaves[wordNumber - 1] =
-          new Slave(isRemote, "thread" + wordNumber, "slave" + wordNumber, slaveArgs);
-      slaves[wordNumber - 1].start();
+      UmxRmxJob slave =
+          new UmxRmxJob(isRemote, "thread" + wordNumber, "slave" + wordNumber, slaveArgs);
+      executorService.execute(slave);
       wordNumber++;
     }
+    executorService.shutdown();
 
     // Wait for each treatment
-    for (int i = 0; i < numberOfWords; i++) {
-      slaves[i].join();
+    while (!executorService.isTerminated()) {
     }
-
   }
 
   @Profiler(name = "Assembling")

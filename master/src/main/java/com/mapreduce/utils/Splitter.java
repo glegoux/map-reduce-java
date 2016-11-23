@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.mapreduce.Config;
+import com.mapreduce.config.Config;
 
 public class Splitter {
 

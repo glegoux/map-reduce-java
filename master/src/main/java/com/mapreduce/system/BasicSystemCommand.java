@@ -1,23 +1,23 @@
 package com.mapreduce.system;
 
-import static com.mapreduce.Config.DEFAULT_HOSTNAME_SSH;
-import static com.mapreduce.Config.DEFAULT_USER_SSH;
-import static com.mapreduce.Config.PYTHON;
-import static com.mapreduce.Config.SHELL;
-import static com.mapreduce.Config.SSH;
-import static com.mapreduce.Config.SSH_PASS;
-import static com.mapreduce.system.SystemCommand.Result;
+import static com.mapreduce.config.Config.DEFAULT_USER_SSH;
+import static com.mapreduce.config.Config.PYTHON;
+import static com.mapreduce.config.Config.SHELL;
+import static com.mapreduce.config.Config.SSH;
+import static com.mapreduce.config.Config.SSH_PASS;
 import static com.mapreduce.system.SystemCommand.execute;
+
+import com.mapreduce.system.SystemCommand.Result;
 
 public class BasicSystemCommand {
 
-  public static Result executeRemoteJar(String pahtToJar, String ip) {
-    return execute(SSH, String.format("%s@%s", DEFAULT_USER_SSH, ip),
+  public static Result executeRemoteJar(String pahtToJar, String hostname) {
+    return execute(SSH, String.format("%s@%s", DEFAULT_USER_SSH, hostname),
         String.format("java -jar %s", pahtToJar));
   }
 
-  public static Result executeBySSH(String command) {
-    return execute(SSH, String.format("%s@%s", DEFAULT_USER_SSH, DEFAULT_HOSTNAME_SSH), command);
+  public static Result executeBySSH(String hostname, String command) {
+    return execute(SSH, String.format("%s@%s", DEFAULT_USER_SSH, hostname), command);
   }
 
   public static Result executeBySSH(String user, String hostname, String command) {

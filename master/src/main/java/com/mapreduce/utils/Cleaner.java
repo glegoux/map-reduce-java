@@ -10,7 +10,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
-import com.mapreduce.Config;
+import com.mapreduce.config.Config;
 
 
 public class Cleaner {
@@ -18,7 +18,7 @@ public class Cleaner {
   public static Set<String> excludedWords = Sets.newHashSet("-", "l", "le", "la", "les", "un",
       "une", "des", "de", "d", "au", "aux", "du", "mon", "ma", "mes", "m", "ton", "ta", "tes", "t",
       "se", "son", "sa", "ses", "s", "notre", "nos", "votre", "vos", "leur", "leurs", "ce",
-      "cette", "ces", "a", "et", "ou", "or", "car", "que", "n", "ne", "il", "ils", "elle", "elles",
+      "cette", "ces", "a", "et", "ou", "or", "que", "n", "ne", "il", "ils", "elle", "elles",
       "vous", "nous");
 
   public static String clean(String filename) {

@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import com.mapreduce.Config;
+import com.mapreduce.config.Config;
 
 public class Aggregator {
 
