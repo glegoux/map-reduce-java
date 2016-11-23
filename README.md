@@ -49,8 +49,9 @@ See https://google.github.io/styleguide/javaguide.html.
 ## Install
 
 1. Clone this repository
-2. Compile this project 
-3. Run this project
+2. Compile this project
+3. Edit configutation in `~/map-reduce-env/config/config.properties`.
+4. Run this project
 
 ## Compile
 
