@@ -6,7 +6,8 @@ import java.util.Properties;
 
 public class Config {
 
-  public static final String CONFIG_FILE = "/cal/homes/glegoux/map-reduce-env/config/config.properties";
+  public static final String CONFIG_FILE =
+      "/cal/homes/glegoux/map-reduce-env/config/config.properties";
   public static Properties CONFIG;
   static {
     try {
@@ -22,7 +23,8 @@ public class Config {
   public static final String OS = CONFIG.getProperty("os");
 
   // architecture
-  public static final String SHARED_DIRECTORY_LOCATION = CONFIG.getProperty("shared.directory.location");
+  public static final String SHARED_DIRECTORY_LOCATION = CONFIG
+      .getProperty("shared.directory.location");
   public static final String SLAVE_JAR_LOCATION = CONFIG.getProperty("slave.jar.location");
   public static final String MASTER_JAR_LOCATION = CONFIG.getProperty("master.jar.location");
 

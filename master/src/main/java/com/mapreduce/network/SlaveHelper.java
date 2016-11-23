@@ -4,18 +4,21 @@ import static com.mapreduce.config.Config.DEFAULT_USER_SSH;
 import static com.mapreduce.config.Config.SLAVE_JAR_LOCATION;
 import static com.mapreduce.config.Config.SSH;
 
+import java.util.Random;
+
 import com.mapreduce.config.Config;
 import com.mapreduce.system.SystemCommand;
 import com.mapreduce.system.SystemCommand.Result;
 
 public class SlaveHelper {
-  
+
   public static int chooseSlaveIndex(int taskNumber, int numberOfSlaves) {
-    if (taskNumber < numberOfSlaves) {
-      return taskNumber;
-    } else {
-      return taskNumber % numberOfSlaves;
-    }
+    return taskNumber % numberOfSlaves;
+  }
+
+  public static int chooseRandomSlaveIndex(int numberOfSlaves) {
+    Random rand = new Random();
+    return rand.nextInt(numberOfSlaves);
   }
 
   public static Result executeRemote(String slaveName, String... arguments) {

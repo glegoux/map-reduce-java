@@ -88,7 +88,7 @@ public class Main {
             cluster.slaveNames.get(SlaveHelper.chooseSlaveIndex(chunkNumber - 1, numberOfSlaves));
       }
       SxUmxJob slaveJob =
-          new SxUmxJob(isRemote, umxMap, "thread" + chunkNumber, slaveName, "modeSXUMX",
+          new SxUmxJob(isRemote, cluster, umxMap, "thread" + chunkNumber, slaveName, "modeSXUMX",
               String.valueOf(chunkNumber));
       executorService.execute(slaveJob);
     }
@@ -127,7 +127,8 @@ public class Main {
         slaveName =
             cluster.slaveNames.get(SlaveHelper.chooseSlaveIndex(wordNumber - 1, numberOfSlaves));
       }
-      UmxRmxJob slaveJob = new UmxRmxJob(isRemote, "thread" + wordNumber, slaveName, slaveArgs);
+      UmxRmxJob slaveJob =
+          new UmxRmxJob(isRemote, cluster, "thread" + wordNumber, slaveName, slaveArgs);
       executorService.execute(slaveJob);
       wordNumber++;
     }
