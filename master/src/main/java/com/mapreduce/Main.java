@@ -41,8 +41,10 @@ public class Main {
       System.err.println("Wrong argument");
       System.exit(1);
     }
-    
-    init(args[1]);
+
+    String filename = args[1];
+
+    init(filename);
     splitting();
     mappping();
     shuffling();

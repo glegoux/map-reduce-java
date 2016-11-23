@@ -2,6 +2,7 @@ package com.mapreduce.profiler;
 
 
 import java.util.logging.FileHandler;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -24,11 +25,13 @@ public class AProfiler {
   public Object around(ProceedingJoinPoint point, Profiler profiler) throws Throwable {
     long start = System.currentTimeMillis();
     Object result = point.proceed();
-    FileHandler fh = new FileHandler(Config.PROFILER_LOG_LOCATION, true);
     Logger logger = Logger.getLogger("");
+    logger.setUseParentHandlers(false);
+    LogManager.getLogManager().reset();
+    FileHandler fileHandler = new FileHandler(Config.PROFILER_LOG_LOCATION, true);
     SimpleFormatter formatter = new SimpleFormatter();
-    fh.setFormatter(formatter);
-    logger.addHandler(fh);
+    fileHandler.setFormatter(formatter);
+    logger.addHandler(fileHandler);
     logger.info(String.format("%s(%s):%d ms", MethodSignature.class.cast(point.getSignature())
         .getMethod().getName(), profiler.name(), System.currentTimeMillis() - start));
     return result;
