@@ -5,6 +5,7 @@ import static com.mapreduce.config.Config.JAVA;
 import static com.mapreduce.config.Config.SLAVE_JAR_LOCATION;
 import static com.mapreduce.config.Config.SSH;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import com.mapreduce.config.Config;
@@ -23,14 +24,15 @@ public class SlaveHelper {
   }
 
   public static Result executeRemote(String slaveName, String... arguments) {
-    String[] args = new String[arguments.length + 2];
+    String[] args = new String[arguments.length + 3];
     args[0] = SSH;
     args[1] = String.format("%s@%s", DEFAULT_USER_SSH, slaveName);
     args[2] = "export MAP_REDUCE_HOME=" + Config.MAP_REDUCE_HOME + ";";
     args[2] += JAVA;
-    args[2] += "-jar";
+    args[2] += " -jar ";
     args[2] += SLAVE_JAR_LOCATION;
-    System.arraycopy(arguments, 0, args, 2, arguments.length);
+    System.arraycopy(arguments, 0, args, 3, arguments.length);
+    System.out.println(Arrays.toString(args));
     return SystemCommand.execute(args);
   }
 
