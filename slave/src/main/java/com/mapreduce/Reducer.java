@@ -13,13 +13,13 @@ public class Reducer {
   public static int merge(String word, String... umxs) {
     List<String> words = new LinkedList<>();
     for (String umx : umxs) {
-      words.addAll(Utils.readFile(Config.SHARED_DIRECTORY_LOCATION + umx));
+      words.addAll(Utils.readFile(Utils.getPath(umx)));
     }
     return Collections.frequency(words, word);
   }
 
   public static void persistSMX(String smx, String word, int frequency) throws IOException {
-    File f = new File(Config.SHARED_DIRECTORY_LOCATION + smx);
+    File f = new File(Utils.getPath(smx));
     if (!f.exists()) {
       f.createNewFile();
     }
@@ -33,7 +33,7 @@ public class Reducer {
   }
 
   public static void persistRMX(String rmx, String word, int frequency) throws IOException {
-    File f = new File(Config.SHARED_DIRECTORY_LOCATION + rmx);
+    File f = new File(Utils.getPath(rmx));
     if (!f.exists()) {
       f.createNewFile();
     }

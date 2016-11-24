@@ -10,4 +10,5 @@ declare -r FILENAME=${2:-data/input.txt}
 
 cd "`dirname "$0"`" && \
 cd .. && \
+source script/config.sh && \
 java -jar master.jar "${MODE}" "${FILENAME}"

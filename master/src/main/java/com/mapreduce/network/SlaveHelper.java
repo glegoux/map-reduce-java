@@ -22,13 +22,14 @@ public class SlaveHelper {
   }
 
   public static Result executeRemote(String slaveName, String... arguments) {
-    String[] args = new String[arguments.length + 5];
+    String[] args = new String[arguments.length + 2];
     args[0] = SSH;
     args[1] = String.format("%s@%s", DEFAULT_USER_SSH, slaveName);
-    args[2] = Config.JAVA;
-    args[3] = "-jar";
-    args[4] = SLAVE_JAR_LOCATION;
-    System.arraycopy(arguments, 0, args, 5, arguments.length);
+    args[2] = "export MAP_REDUCE_HOME=" + Config.MAP_REDUCE_HOME + ";";
+    args[2] += Config.JAVA;
+    args[2] += "-jar";
+    args[2] += SLAVE_JAR_LOCATION;
+    System.arraycopy(arguments, 0, args, 2, arguments.length);
     return SystemCommand.execute(args);
   }
 

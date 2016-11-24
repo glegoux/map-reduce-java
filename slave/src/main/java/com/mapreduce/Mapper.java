@@ -12,7 +12,7 @@ import java.util.Set;
 public class Mapper {
 
   public static List<String> split(String sx) {
-    ArrayList<String> lines = Utils.readFile(Config.SHARED_DIRECTORY_LOCATION + sx);
+    ArrayList<String> lines = Utils.readFile(Utils.getPath(sx));
     List<String> words = new ArrayList<>();
     for (String line : lines) {
       for (String word : line.split("\\W+")) {
@@ -23,7 +23,7 @@ public class Mapper {
   }
 
   public static void persist(String umx, List<String> words) throws IOException {
-    File f = new File(Config.SHARED_DIRECTORY_LOCATION + umx);
+    File f = new File(Utils.getPath(umx));
     if (!f.exists()) {
       f.createNewFile();
     }

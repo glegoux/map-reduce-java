@@ -17,10 +17,13 @@ public class Cluster {
 
   public List<String> slaveNames;
 
-  public Cluster() {
+  public Cluster(int numberOfMachines) {
     this.slaveNames = Collections.synchronizedList(new ArrayList<String>());
     List<String> hostnames = Utils.readFile(Config.IP_LOCATION);
     for (String hostname : hostnames) {
+      if (this.slaveNames.size() == numberOfMachines) {
+        break;
+      }
       Result result =
           SystemCommand.execute(SSH, DEFAULT_USER_SSH + "@" + hostname.trim(), "-o",
               String.format("ConnectTimeout=%s", SSH_TIMOUT), "echo OK");
@@ -28,6 +31,10 @@ public class Cluster {
       if (result.status == 0) {
         slaveNames.add(hostname.trim());
       }
+    }
+    if (this.slaveNames.size() < numberOfMachines) {
+      System.err.println("Not enough available machines");
+      System.exit(1);;
     }
   }
 

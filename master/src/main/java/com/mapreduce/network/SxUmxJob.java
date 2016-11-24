@@ -27,11 +27,9 @@ public class SxUmxJob extends Thread {
   public void run() {
     if (this.isRemote) {
       this.result = SlaveHelper.executeRemote(this.slaveName, this.args);
-      System.out.println(result);
     } else {
       this.result = SlaveHelper.executeLocal(this.args);
     }
-
     while (this.result.status != 0) {
       executeRandom();
     }
@@ -42,13 +40,12 @@ public class SxUmxJob extends Thread {
   }
 
   public void executeRandom() {
-    String slaveName =
-        cluster.slaveNames.get(SlaveHelper.chooseRandomSlaveIndex(cluster.slaveNames.size()));
     if (isRemote) {
-      this.result = SlaveHelper.executeRemote(slaveName, args);
-      System.out.println(result);
+      String slaveName =
+          cluster.slaveNames.get(SlaveHelper.chooseRandomSlaveIndex(cluster.slaveNames.size()));
+      this.result = SlaveHelper.executeRemote(slaveName, this.args);
     } else {
-      this.result = SlaveHelper.executeLocal(args);
+      this.result = SlaveHelper.executeLocal(this.args);
     }
   }
 

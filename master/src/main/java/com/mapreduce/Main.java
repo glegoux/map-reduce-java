@@ -12,6 +12,7 @@ import com.mapreduce.network.Cluster;
 import com.mapreduce.network.SlaveHelper;
 import com.mapreduce.network.SxUmxJob;
 import com.mapreduce.network.UmxRmxJob;
+import com.mapreduce.profiler.Logging;
 import com.mapreduce.profiler.Profiler;
 import com.mapreduce.utils.Aggregator;
 import com.mapreduce.utils.Cleaner;
@@ -66,8 +67,9 @@ public class Main {
   public static void init(String filename) {
     Main.filename = Cleaner.clean(filename);
     if (isRemote) {
-      cluster = new Cluster();
+      cluster = new Cluster(Config.SLAVE_NUMBER);
       numberOfSlaves = cluster.slaveNames.size();
+      Logging.get().info("number of machines " + numberOfSlaves);
     }
   }
 

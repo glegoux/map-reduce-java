@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Paths;
 
 import com.mapreduce.config.Config;
 
@@ -14,7 +15,7 @@ public class Aggregator {
 
   public static String assemble(int numberOfwords) {
 
-    String outputPathname = Config.SHARED_DIRECTORY_LOCATION + "output";
+    String outputPathname = Paths.get(Config.SHARED_DIRECTORY_LOCATION , "output").toString();
     FileWriter fstream;
     BufferedWriter out = null;
     File output = new File(outputPathname);
@@ -28,7 +29,7 @@ public class Aggregator {
     for (int wordNumber = 1; wordNumber <= numberOfwords; wordNumber++) {
       FileInputStream fis;
       try {
-        fis = new FileInputStream(new File(Config.SHARED_DIRECTORY_LOCATION + "RM" + wordNumber));
+        fis = new FileInputStream(new File(Paths.get(Config.SHARED_DIRECTORY_LOCATION, "RM" + wordNumber).toString()));
         BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
         String aLine;

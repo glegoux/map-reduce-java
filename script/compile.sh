@@ -6,6 +6,7 @@ cd `dirname $0` && \
 mkdir -vp "${DEST}" && \
 mkdir -vp "${DEST}/shared-folder/" && \
 mkdir -vp "${DEST}/profiler/" && \
+touch "${DEST}/profiler/profiler.log" && \
 cp -vfr "../data/" "${DEST}" && \
 cp -vfr "../script/" "${DEST}" && \
 cp -vfr "../config/" "${DEST}" && \

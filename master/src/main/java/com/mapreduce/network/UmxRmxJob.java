@@ -26,20 +26,18 @@ public class UmxRmxJob extends Thread {
     } else {
       this.result = SlaveHelper.executeLocal(args);
     }
-
     while (this.result.status != 0) {
       executeRandom();
     }
   }
 
   public void executeRandom() {
-    String slaveName =
-        cluster.slaveNames.get(SlaveHelper.chooseRandomSlaveIndex(cluster.slaveNames.size()));
     if (isRemote) {
-      this.result = SlaveHelper.executeRemote(slaveName, args);
-      System.out.println(result);
+      String slaveName =
+          cluster.slaveNames.get(SlaveHelper.chooseRandomSlaveIndex(cluster.slaveNames.size()));
+      this.result = SlaveHelper.executeRemote(slaveName, this.args);
     } else {
-      this.result = SlaveHelper.executeLocal(args);
+      this.result = SlaveHelper.executeLocal(this.args);
     }
   }
 

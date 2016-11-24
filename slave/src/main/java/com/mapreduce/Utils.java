@@ -19,5 +19,9 @@ public class Utils {
     }
     return (ArrayList<String>) lines;
   }
+  
+  public static String getPath(String filename) {
+    return Paths.get(Config.SHARED_DIRECTORY_LOCATION, filename).toString();
+  }
 
 }
