@@ -2,7 +2,7 @@ package com.mapreduce.network;
 
 import static com.mapreduce.config.Config.DEFAULT_USER_SSH;
 import static com.mapreduce.config.Config.SSH;
-import static com.mapreduce.config.Config.SSH_TIMOUT;
+import static com.mapreduce.config.Config.SSH_TIMEOUT;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +26,7 @@ public class Cluster {
       }
       Result result =
           SystemCommand.execute(SSH, DEFAULT_USER_SSH + "@" + hostname.trim(), "-o",
-              String.format("ConnectTimeout=%s", SSH_TIMOUT), "echo OK");
+              String.format("ConnectTimeout=%s", SSH_TIMEOUT), "echo OK");
       System.out.println(result);
       if (result.status == 0) {
         slaveNames.add(hostname.trim());

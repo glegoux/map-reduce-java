@@ -1,6 +1,7 @@
 package com.mapreduce.network;
 
 import static com.mapreduce.config.Config.DEFAULT_USER_SSH;
+import static com.mapreduce.config.Config.JAVA;
 import static com.mapreduce.config.Config.SLAVE_JAR_LOCATION;
 import static com.mapreduce.config.Config.SSH;
 
@@ -26,7 +27,7 @@ public class SlaveHelper {
     args[0] = SSH;
     args[1] = String.format("%s@%s", DEFAULT_USER_SSH, slaveName);
     args[2] = "export MAP_REDUCE_HOME=" + Config.MAP_REDUCE_HOME + ";";
-    args[2] += Config.JAVA;
+    args[2] += JAVA;
     args[2] += "-jar";
     args[2] += SLAVE_JAR_LOCATION;
     System.arraycopy(arguments, 0, args, 2, arguments.length);
@@ -35,7 +36,7 @@ public class SlaveHelper {
 
   public static Result executeLocal(String... arguments) {
     String[] args = new String[arguments.length + 3];
-    args[0] = Config.JAVA;
+    args[0] = JAVA;
     args[1] = "-jar";
     args[2] = SLAVE_JAR_LOCATION;
     System.arraycopy(arguments, 0, args, 3, arguments.length);

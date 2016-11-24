@@ -56,7 +56,7 @@ public class Config {
   public static final String SSH_PASS = CONFIG.getProperty("sshpass");
   public static final String DEFAULT_USER_SSH = CONFIG.getProperty("ssh.user");
   public static final String DEFAULT_HOSTNAME_SSH = CONFIG.getProperty("ssh.hostname");
-  public static final String SSH_TIMOUT = CONFIG.getProperty("ssh.timeout");
+  public static final String SSH_TIMEOUT = CONFIG.getProperty("ssh.timeout");
 
   // java
   public static final String JAVA = CONFIG.getProperty("java");
