@@ -27,7 +27,6 @@ public class Cluster {
       Result result =
           SystemCommand.execute(SSH, DEFAULT_USER_SSH + "@" + hostname.trim(), "-o",
               String.format("ConnectTimeout=%s", SSH_TIMEOUT), "echo OK");
-      System.out.println(result);
       if (result.status == 0) {
         slaveNames.add(hostname.trim());
       }

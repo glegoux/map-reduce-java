@@ -5,7 +5,6 @@ import static com.mapreduce.config.Config.JAVA;
 import static com.mapreduce.config.Config.SLAVE_JAR_LOCATION;
 import static com.mapreduce.config.Config.SSH;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import com.mapreduce.config.Config;
@@ -32,7 +31,6 @@ public class SlaveHelper {
     args[2] += " -jar ";
     args[2] += SLAVE_JAR_LOCATION;
     System.arraycopy(arguments, 0, args, 3, arguments.length);
-    System.out.println(Arrays.toString(args));
     return SystemCommand.execute(args);
   }
 
