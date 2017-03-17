@@ -27,8 +27,8 @@ http://releases.ubuntu.com/16.04/
 
 ### Integrated Development Environment (IDE)
 
-Eclipse IDE for Java Developers
-Version: Luna Service Release 2 (4.4.2) 
+Eclipse IDE for Java Developers  
+Version: Luna Service Release 2 (4.4.2)  
 https://eclipse.org/luna/
 
 ### Plugins
