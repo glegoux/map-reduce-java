@@ -74,6 +74,6 @@ Go to `~/map-reduce-env/` folder, and execute:
 ## References
 
 Java:
-- https://docs.oracle.com/javase/8/docs/ 
-- https://docs.oracle.com/javase/8/docs/api/
+- https://docs.oracle.com/javase/7/docs/ 
+- https://docs.oracle.com/javase/7/docs/api/
 - https://docs.oracle.com/javase/specs/
