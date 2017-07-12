@@ -33,7 +33,7 @@ public class Cluster {
     }
     if (this.slaveNames.size() < numberOfMachines) {
       System.err.println("Not enough available machines");
-      System.exit(1);;
+      System.exit(1);
     }
   }
 
