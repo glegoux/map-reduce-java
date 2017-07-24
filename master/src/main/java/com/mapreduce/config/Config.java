@@ -23,7 +23,7 @@ public class Config {
   private static String getAbsoluePath(String pathName) {
     String prefixPathName = System.getenv().get("MAP_REDUCE_HOME");
     if (prefixPathName == null) {
-      System.err.println(String.format("MAP_REDUCE_HOME environment variable doesn't exist"));
+      System.err.println("MAP_REDUCE_HOME environment variable doesn't exist");
       System.exit(1);
     }
     if (Files.notExists(Paths.get(prefixPathName))) {
