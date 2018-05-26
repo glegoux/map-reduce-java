@@ -5,7 +5,10 @@
 # Javadoc
 src/doc/
 
-# Eclipse
+# IntelliJ IDE
+.idea/
+
+# Eclipse IDE
 .classpath
 .target
 .project
