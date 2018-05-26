@@ -40,7 +40,7 @@ public class SystemCommand {
       String stdout = convertInputStream(shell.getInputStream());
       String stderr = convertInputStream(shell.getErrorStream());
       int status = shell.exitValue();
-      return new Result(commandLine, stdout.toString(), stderr.toString(), status);
+      return new Result(commandLine, stdout, stderr, status);
     } catch (IOException e) {
       return new Result(commandLine, "", "I/O error occurs", 127);
     } catch (InterruptedException e) {
@@ -54,7 +54,7 @@ public class SystemCommand {
     StringBuilder sb = new StringBuilder();
     String line;
     while ((line = br.readLine()) != null) {
-      sb.append(line + '\n');
+      sb.append(line).append('\n');
     }
     return sb.toString();
   }
